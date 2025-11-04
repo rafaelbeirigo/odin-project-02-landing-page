@@ -2,6 +2,12 @@
 
 This is the [[https://www.theodinproject.com/lessons/foundations-landing-page][Project 2]] of the [[https://www.theodinproject.com/paths/foundations/courses/foundations][Foundations Course from The Odin Project]].
 
+It currently looks like [[https://rafaelbeirigo.github.io/odin-project-02-landing-page/][this]].
+
+It should look like this:
+
+[[file:specs/images/landing-page.png]]
+
 * Setup
 
 The deployment is made with GitHub Actions, using the following script:
