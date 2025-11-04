@@ -43,8 +43,24 @@ Github configuration:
 1. Add branch ~gh-pages~ locally and remotely:
 
    #+begin_src shell
-   git checkout -b gh-pages
-   git push -u origin gh-pages
+   git checkout --orphan gh-pages
+   git rm -rf .
+   echo "My GitHub Pages site" > index.html
+   git add index.html
+   git commit -m "Initial gh-pages commit"
+   git push origin gh-pages
+   #+end_src
+
+   #+RESULTS:
+   #+begin_src shell
+   M	README.org
+   rm '.github/workflows/deploy.yml'
+   rm 'README.org'
+   rm 'specs/images/colors-and-fonts.png'
+   rm 'specs/images/landing-page.png'
+   [gh-pages (root-commit) 32235ef] Initial gh-pages commit
+    1 file changed, 1 insertion(+)
+    create mode 100644 index.html
    #+end_src
 
 2. Configure GitHub Pages to deploy from ~gh-pages~.
