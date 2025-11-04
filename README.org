@@ -1,0 +1,50 @@
+* Introduction
+
+This is the [[https://www.theodinproject.com/lessons/foundations-landing-page][Project 2]] of the [[https://www.theodinproject.com/paths/foundations/courses/foundations][Foundations Course from The Odin Project]].
+
+* Setup
+
+The deployment is made with GitHub Actions, using the following script:
+
+#+begin_src yaml :tangle .github/workflows/deploy.yml :mkdirp yes
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write  # allows pushing to gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Emacs
+        run: sudo apt-get install -y emacs-nox
+
+      - name: Tangle and export Org site
+        run: emacs --batch -l org --eval "(progn (find-file \"README.org\") (org-babel-tangle) (kill-emacs))"
+
+      - name: Deploy site to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: site
+#+end_src
+
+Github configuration:
+
+1. Add branch ~gh-pages~ locally and remotely:
+
+   #+begin_src shell
+   git checkout -b gh-pages
+   git push -u origin gh-pages
+   #+end_src
+
+2. Configure GitHub Pages to deploy from ~gh-pages~.
