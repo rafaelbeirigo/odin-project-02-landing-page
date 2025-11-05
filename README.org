@@ -70,3 +70,11 @@ Github configuration:
    #+end_src
 
 2. Configure GitHub Pages to deploy from ~gh-pages~.
+
+* ~index.html~
+
+[[file:site/index.html][site/index.html]] ≡
+
+#+begin_src html :tangle site/index.html :mkdirp yes
+
+#+end_src
