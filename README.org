@@ -85,15 +85,249 @@ Let's add the boilerplate and main sections.
   <head>
     <meta charset="UTF-8">
     <title>An Awesome Website</title>
+    <<head>>
   </head>
 
   <body>
-    <<Header>>
-    <<Hero>>
+    <div class="header-hero-container">
+      <<Header>>
+      <<Hero>>
+    </div>
     <<Information>>
     <<Quote>>
     <<Call to Action>>
     <<Footer>>
   </body>
 </html>
+#+end_src
+
+Let's add the /Header Logo/ and the /links/.
+For now, we'll be using no image, just the text, like the specification image.
+
+~<​<Header>> +≡​~
+
+#+begin_src html :noweb-ref Header
+<div class="header">
+  Header Logo
+
+  <ul class="right-links">
+    <li><a href="#">Header link one</a></li>
+    <li><a href="#">Header link two</a></li>
+    <li><a href="#">Header link three</a></li>
+  </ul>
+</div>
+#+end_src
+
+We'll need to change the style of that.
+Let's tangle ~style.css~.
+We add the necessary boilerplate.
+Then we add a block ID for the class ~.header~ and another for ~ul~ (the links will come in it).
+
+[[file:site/style.css][site/style.css]] ≡
+
+#+begin_src css :tangle site/style.css
+<<CSS boilerplate>>
+
+:root {
+  <<root>>
+}
+
+body {
+  <<body CSS>>
+}
+
+.header-hero-container {
+  <<.header-hero-container>>
+}
+
+.header {
+  <<.header>>
+}
+
+ul {
+  <<ul>>
+}
+
+li a {
+  <<li a>>
+}
+#+end_src
+
+We want no decorations for the links:
+
+~<​<li a>> +≡​~
+
+#+begin_src html :noweb-ref li a
+text-decoration: none;
+#+end_src
+
+CSS needs some boilerplate for "normalization" purposes:
+
+~<​<CSS boilerplate>> +≡​~
+
+#+begin_src html :noweb-ref CSS boilerplate
+,*,
+,*::before,
+,*::after {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.spaced-stack * + * {
+  margin-top: 1em;
+}
+#+end_src
+
+We need to include the style sheet on the page:
+
+~<​<head>> +≡​~
+
+#+begin_src html :noweb-ref head
+<link rel="stylesheet" href="./style.css">
+#+end_src
+
+The list should be "horizontalized".
+We get it making it ~flex~.
+We also want no bullets.
+There should be some space between the links.
+
+~<​<ul>> +≡​~
+
+#+begin_src html :noweb-ref ul
+display: flex;
+list-style: none;
+gap: 16px;
+#+end_src
+
+Now let's make the header ~flex~, so the items "horizontalize".
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+display: flex;
+#+end_src
+
+Also move title to left corner, links to right corner.
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+justify-content: space-between;
+#+end_src
+
+Time to look at the fonts.
+According to the specs, the entire site uses the font /Roboto/.
+Let's first add it to the page:
+
+~<​<head>> +≡​~
+
+#+begin_src html :noweb-ref head
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+#+end_src
+
+Now we use it for the entire page, with a fall-back, just in case.
+
+~<​<body CSS>> +≡​~
+
+#+begin_src html :noweb-ref body CSS
+font-family: "Roboto", sans-serif;
+#+end_src
+
+/Header Logo/ has the following specs:
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+font-size: 24px;
+color: var(--color-header-hero);
+#+end_src
+
+~<​<root>> +≡​~
+
+#+begin_src html :noweb-ref root
+--color-header-hero: #F9FAF8;
+#+end_src
+
+But the links have a different font spec:
+
+~<​<li a>> +≡​~
+
+#+begin_src html :noweb-ref li a
+font-size: var(--font-size-secondary-header-hero);
+color: var(--color-secondary-header-hero);
+#+end_src
+
+~<​<root>> +≡​~
+
+#+begin_src html :noweb-ref root
+--font-size-secondary-header-hero: 18px;
+--color-secondary-header-hero: #E5E7EB;
+#+end_src
+
+Header has a dark background.
+We set it to the parent ~div~, as it's the same for the hero:
+
+~<​<.header-hero-container>> +≡​~
+
+#+begin_src html :noweb-ref .header-hero-container
+background-color: var(--background-color-header-hero-footer);
+#+end_src
+
+~<​<root>> +≡​~
+
+#+begin_src html :noweb-ref root
+--background-color-header-hero-footer: #1F2937;
+#+end_src
+
+/Header Logo/ is *bold*:
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+font-weight: 900;
+#+end_src
+
+But the links are not:
+
+~<​<li a>> +≡​~
+
+#+begin_src html :noweb-ref li a
+font-weight: normal;
+#+end_src
+
+Let's give some space around the header text:
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+height: 65px;
+#+end_src
+
+and center everything vertically:
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+align-items: center;
+#+end_src
+
+We need lateral margins:
+
+~<​<.header>> +≡​~
+
+#+begin_src html :noweb-ref .header
+width: 800px;
+#+end_src
+
+Contents from header and hero are centered on the page:
+
+~<​<.header-hero-container>> +≡​~
+
+#+begin_src html :noweb-ref .header-hero-container
+display: flex;
+justify-content: center;
 #+end_src
