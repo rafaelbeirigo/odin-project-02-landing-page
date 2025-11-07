@@ -1,0 +1,25 @@
+<<CSS boilerplate>>
+
+:root {
+  <<root>>
+}
+
+body {
+  <<body CSS>>
+}
+
+.header-hero-container {
+  <<.header-hero-container>>
+}
+
+.header {
+  <<.header>>
+}
+
+ul {
+  <<ul>>
+}
+
+li a {
+  <<li a>>
+}
