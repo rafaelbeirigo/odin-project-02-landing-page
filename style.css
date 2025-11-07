@@ -1,25 +1,53 @@
-<<CSS boilerplate>>
+*,
+*::before,
+*::after {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.spaced-stack * + * {
+  margin-top: 1em;
+}
 
 :root {
-  <<root>>
+  --color-header-hero: #F9FAF8;
+  --font-size-secondary-header-hero: 18px;
+  --color-secondary-header-hero: #E5E7EB;
+  --background-color-header-hero-footer: #1F2937;
 }
 
 body {
-  <<body CSS>>
+  font-family: "Roboto", sans-serif;
 }
 
 .header-hero-container {
-  <<.header-hero-container>>
+  background-color: var(--background-color-header-hero-footer);
+  display: flex;
+  justify-content: center;
 }
 
 .header {
-  <<.header>>
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  color: var(--color-header-hero);
+  font-weight: 900;
+  height: 65px;
+  align-items: center;
+  width: 800px;
 }
 
 ul {
-  <<ul>>
+  display: flex;
+  list-style: none;
+  gap: 16px;
 }
 
 li a {
-  <<li a>>
+  text-decoration: none;
+  font-size: var(--font-size-secondary-header-hero);
+  color: var(--color-secondary-header-hero);
+  font-weight: normal;
 }
